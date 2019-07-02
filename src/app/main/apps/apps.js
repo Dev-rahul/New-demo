@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
+import { withRouter} from 'react-router-dom';
 import {withStyles} from '@material-ui/core/styles';
 import {FusePageSimple} from '@fuse';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import  * as Actions from './store/actions';
+import withReducer from 'app/store/withReducer';
+import reducer from './store/reducers';
+import {bindActionCreators} from 'redux';
 const styles = theme => ({
     layoutRoot: {}
 });
 
 class Apps extends Component {
+    connection = null;
     constructor(props) {
         super(props);
-        this.state = {
-            connected : false,
-            agentList: [],
-            queueList: [],
-        }
     }
     componentDidMount() {
         console.log("apps.js");
@@ -42,66 +44,45 @@ class Apps extends Component {
                 this.connection.onopen = () => {
                     console.log("123456677")
                     this.props.history.push('apps/dashboard')
-                    this.setState({connected: true});
                     this.connection.send('panel_type:dashboard');
                     this.connection.send(queue_sendData);
                     this.connection.send(sendData);
                     setInterval( _ =>{
-                        if(this.connection !== null && this.state.connected) {
+                        if(this.connection ) {
                             this.connection.send('ping');
                         }
                     }, 5000 )
                 }
                 this.connection.onmessage = evt => { 
-                        console.log("on websocket message", evt.data);
+                        //console.log("on websocket message", evt.data);
                         if(evt.data !== 'pong') {
                             const responaeData = JSON.parse(evt.data);
                             if(responaeData.action === 'create_agent') {
                               //  console.log("agentResponse", responaeData.response);
-                                this.setState({agentList: responaeData.response});
+                             //   this.setState({agentList: responaeData.response});
+                             this.props.handleUpdateAgent(responaeData.response)
+                             console.log("this.props.agentList", this.props.agentList)
+                             
                             }
                             if(responaeData.action === 'update_agent') {
                            //     console.log("updateResponse", responaeData.response);
-
-                                let tempAgentList = [...this.state.agentList];
-                                 //console.log('tempQueList',tempQueList)
+                               // console.log("this.props.agentList", this.props.agentList)
                                 
-                                
-                                    responaeData.response.map(currAgent => {
-                                       let index = 0;
-                                       tempAgentList.map(agent => {
-                                           if(agent.extension === currAgent.extension) {
-                                             //  queue.current_calls = currQueue.current_calls;
-                                             tempAgentList.splice(index, 1, currAgent);
-                                           }
-                                           index = index+ 1;
-                                        })
-                                    })
-                                this.setState({agentList: tempAgentList});
+                                    this.props.handleUpdateAgent(responaeData.response)
+                                //this.setState({agentList: tempAgentList});
                             }
                             if(responaeData.action === 'create_queue') {
                               //  console.log("QueueResponse", responaeData.response);
-                                this.setState({queueList: responaeData.response});
+                                //this.setState({queueList: responaeData.response});
+                                this.props.handleUpdateQueue(responaeData.response)
                             }
                             if(responaeData.action === 'update_queue') {
                               //  console.log("UpdateQueueResponse", responaeData.response);
-                                 let tempQueList = [...this.state.queueList];
-                               //  console.log('tempQueList',tempQueList)
-                                
-                                
-                                    responaeData.response.map(currQueue => {
-                                       let index = 0;
-                                        tempQueList.map(queue => {
-                                           if(queue.extension === currQueue.extension) {
-                                             //  queue.current_calls = currQueue.current_calls;
-                                             tempQueList.splice(index, 1, currQueue);
-                                           }
-                                           index = index+ 1;
-                                        })
-                                    })
+                                 
                                  
                                 
-                                this.setState({queueList: tempQueList });
+                                //this.setState({queueList: tempQueList });
+                                this.props.handleUpdateQueue(responaeData.response)
                               //  console.log('filteredItems',this.state.queueList);
                             }
                         }
@@ -113,7 +94,7 @@ class Apps extends Component {
 
                     this.connection.onclose = () => {
                             this.connection = null;
-                            this.setState({connected: false});
+                           // this.setState({connected: false});
                         //    let connection = new WebSocket('ws://10.226.14.70:7778/6/sock');
                     }
 
@@ -126,18 +107,14 @@ class Apps extends Component {
     }
     render()
     {
+       // console.log("in render", this.props)
         const {classes} = this.props;
         return (
             <FusePageSimple
                 classes={{
                     root: classes.layoutRoot
                 }}
-                header={
-                    <div className="p-24"><h4>Apps</h4></div>
-                }
-                contentToolbar={
-                    <div className="px-24"><h4>Apps js</h4></div>
-                }
+                
                 content={
                     <div className="p-24">
                         <h4>Apps</h4>
@@ -149,4 +126,22 @@ class Apps extends Component {
     }
 }
 
-export default withStyles(styles, {withTheme: true})(Apps);
+
+function mapDispatchToProps(dispatch)
+{
+    return bindActionCreators({
+        handleUpdateAgent  : Actions.updateAgentList,
+        handleUpdateQueue  : Actions.updateQueueList,
+    }, dispatch);
+}
+
+function mapStateToProps({socketReducer})
+{
+    return {
+        agentList: socketReducer.socket.agentList,
+        queueList: socketReducer.socket.queueList
+    }
+}
+//export default withStyles(styles, {withTheme: true})(Apps);
+//export default connect(null,mapDispatchToProps)(Apps);
+export default withReducer('socketReducer', reducer)(withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(Apps))));

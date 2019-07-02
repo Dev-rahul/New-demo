@@ -112,6 +112,14 @@ function getInitialThemes()
 function updateMainThemeVariations(mainTheme)
 {
     const themesObj = Object.keys(FuseThemesConfig).length !== 0 ? FuseThemesConfig : defaultThemes;
+    if (global.localStorage) {
+        global.localStorage.setItem(
+          'broadview-theme',
+          JSON.stringify({
+           'main-theme': mainTheme
+          })
+        )
+      }
     return mainThemeVariations(themesObj[mainTheme])
 }
 
