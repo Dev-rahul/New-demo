@@ -10,6 +10,7 @@ import {bindActionCreators} from 'redux';
 import { WidthProvider, Responsive } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import DashBoardScrumCard from './dashboardScrumCard';
+import AgentCard from './agentCard';
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -69,7 +70,7 @@ class Dashboard extends Component {
             
           </div>
           <div key="2" data-grid={{ w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3 }}>
-            <span className="text">2</span>
+            <AgentCard/>
           </div>
           <div key="3" data-grid={{ w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3 }}>
             <span className="text">3</span>

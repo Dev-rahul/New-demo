@@ -1,4 +1,4 @@
-import Dashboard from './Dashboard';
+import Dashboard from './dashboardDummy';
 import OneHrSumm from './onehrsumm';
 import Settings from './settings';
 import Apps from '../apps';
