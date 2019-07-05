@@ -9,6 +9,7 @@ import reducer from '../store/reducers';
 import withReducer from 'app/store/withReducer';
 import AgentCard from './agentCard';
 import QueueCard from './queueCard';
+import AgentDistribution from './agentDistribution';
 
 import { WidthProvider, Responsive } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
@@ -85,36 +86,7 @@ function DashboardDummy(props)
 
     useEffect(() => {
         let updateLayout = {...layout};
-       // console.log("original layout", layout);
-        // if ( settings )
-        // {
-        //     console.log("settings changed", settings);
-        //     if(updateLayout.lg) {
-        //         updateLayout.lg.map(layouts => {
-        //             layouts.w = layouts.w -2;
-        //         })
-        //     }
-            
-        //     console.log("updated layout", updateLayout)
-        //     saveToLS("layouts", updateLayout);
-        //     setlayout(updateLayout );
-        //     // layout.sm.map(layouts => {
-        //     //     layouts.w = layouts.w -1;
-        //     // })
-            
-        // } else {
-        //     if(updateLayout.lg) {
-        //     updateLayout.lg.map(layouts => {
-        //         layouts.w = layouts.w + 5;
-        //     })
-        //     updateLayout.sm.map(layouts => {
-        //         layouts.w = layouts.w + 5;
-        //     })
-        // }
-        //     console.log("before save layout", updateLayout)
-        //     saveToLS("layouts", updateLayout);
-        //     setlayout(updateLayout );
-        // }
+       
         ResponsiveReactGridLayout = WidthProvider(Responsive);
         originalLayouts= layout;
     }, [settings]);
@@ -139,9 +111,31 @@ function DashboardDummy(props)
           }
         >
         <div key="1" data-grid={{key: "1", w: 2, h: 6, x: 0, y: 0, minW: 2, minH: 6, i: "1" }} style={{width: "100%", flexGrow: 1}}>
-            <div style={{maxWidth: "99%", maxHeight: "98%"}}>
+            {/* <div style={{maxWidth: "99%", maxHeight: "98%"}}>
                 <DashBoardScrumCard queueList={queueList} agentList={agentList}/>
+            </div> */}
+            <Paper className="w-full rounded-8 shadow-none border-1" color="primary" style={{borderRadius: 4, borderWidth: 1, height: "100%", width: "100%"}}>
+              <div className="flex items-center justify-between px-8 py-8 border-b-1" style={{cursor: "crosshair",}} >
+                <Typography className="text-16" >Queue Overview</Typography>
+                <IconButton size="small" color="secondary" ><Icon>close</Icon>
+                </IconButton>
+              </div>
+              <div className="flex flex-col flex-1 w-full" style={{height: "100%", width: "100%", overflow: "auto"}}>
+                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto "
+                  style={{height: "100%", width: "100%"}}>
+                  <FuseAnimateGroup
+
+                    enter={{
+                        animation: "transition.slideUpBigIn"
+                    }}
+                    className="flex flex-wrap px-2 "
+                    style={{height: "82%", width: "100%"}}
+                  >
+                      <DashBoardScrumCard queueList={queueList} agentList={agentList}/>
+                </FuseAnimateGroup>
+              </div>
             </div>
+          </Paper>
           </div>
           <div key="2" data-grid={{key: "2", w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3, i: "2" }}>
             <Paper className="w-full rounded-8 shadow-none border-1" color="primary" style={{borderRadius: 4, borderWidth: 1, height: "100%", width: "100%"}}>
@@ -184,7 +178,7 @@ function DashboardDummy(props)
                     enter={{
                         animation: "transition.slideUpBigIn"
                     }}
-                    className="flex flex-wrap px-16"
+                    className="flex flex-wrap px-2"
 
                   >
                       {queueList.map(function(queue, index){
@@ -196,10 +190,53 @@ function DashboardDummy(props)
           </Paper>
           </div>
           <div key="4" data-grid={{key: "4", w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3, i: "4" }}>
-            <span className="text">4</span>
+          <Paper className="w-full rounded-8 shadow-none border-1" color="primary" style={{borderRadius: 4, borderWidth: 1, height: "100%", width: "100%"}}>
+              <div className="flex items-center justify-between px-8 py-8 border-b-1" style={{cursor: "crosshair",}} >
+                <Typography className="text-16" >Agent Distribution</Typography>
+                <IconButton size="small" color="secondary" ><Icon>close</Icon>
+                </IconButton>
+              </div>
+              <div className="flex flex-col flex-1 w-full" style={{maxHeight: "82%", width: "100%", overflow: "auto"}}>
+                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto MyNonDraggableAreaClassName"
+                  style={{height: "100%", width: "100%"}}>
+                  <FuseAnimateGroup
+
+                    enter={{
+                        animation: "transition.slideUpBigIn"
+                    }}
+                    className="flex flex-wrap px-2"
+
+                  >
+                    <AgentDistribution agentData={agentList}/>
+                </FuseAnimateGroup>
+              </div>
+            </div>
+          </Paper>
           </div>
           <div key="5" data-grid={{key: "5", w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3,  i: "5"}}>
-            <span className="text">5</span>
+          <Paper className="w-full rounded-8 shadow-none border-1" color="primary" style={{borderRadius: 4, borderWidth: 1, height: "100%", width: "100%"}}>
+              <div className="flex items-center justify-between px-8 py-8 border-b-1" style={{cursor: "crosshair",}} >
+                <Typography className="text-16" >Calls $ Agent</Typography>
+                <IconButton size="small" color="secondary" ><Icon>close</Icon>
+                </IconButton>
+              </div>
+              <div className="flex flex-col flex-1 w-full" style={{maxHeight: "82%", width: "100%", overflow: "auto"}}>
+                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto MyNonDraggableAreaClassName"
+                  style={{height: "100%", width: "100%"}}>
+                  <FuseAnimateGroup
+
+                    enter={{
+                        animation: "transition.slideUpBigIn"
+                    }}
+                    className="flex flex-wrap px-16"
+
+                  >
+                  {/* {queueList.length>0? <GraphComponent queueData={queueList} graphHeight={100} graphWidth={100}/>: null} */}
+                      
+                </FuseAnimateGroup>
+              </div>
+            </div>
+          </Paper>
           </div>
         </ResponsiveReactGridLayout>
         

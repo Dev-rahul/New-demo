@@ -60,27 +60,37 @@ const scrumBoardStates = [
     {
         id: 1,
         agents: [],
-        title: "Ready"
+        title: "NEW LOGIN"
     },
     {
         id: 2,
         agents: [],
-        title: "Busy"
+        title: "AWAY"
     },
     {
         id: 3,
         agents: [],
-        title: "Away"
+        title: "READY"
     },
     {
         id: 4,
         agents: [],
-        title: "Wrap Up"
+        title: "BUSY"
     },
     {
         id: 5,
         agents: [],
-        title: "Connected"
+        title: "CALL BACK"
+    },
+    {
+        id: 6,
+        agents: [],
+        title: "ON QUEUE CALL"
+    },
+    {
+        id: 7,
+        agents: [],
+        title: "WRAP UP"
     }
 
 ]
@@ -88,27 +98,8 @@ const scrumBoardStates = [
 function DashboardScrumCard(props)
 {
     const dispatch = useDispatch();
-    console.log("queuelist in scrumcard", props.queueList, props.agentList);
-    let agentReady = [], agentBusy =[], agentAway =[], agentWrapUp = [];
-    props.queueList.map(queue => {
-        queue.members.map(member => {
-            props.agentList.map(agent => {
-                if(member.extension === agent.extension) {
-                    if(agent.state === 'New Login') {
-                        agentAway.push(agent);
-                    } else if(agent.state !== 'Ready') {
-                        agentAway.push(agent);
-                    } else {
-                        if(agent.on_a_call === 1 || agent.on_a_call === 3)  {
-                            agentReady.push(agent); 
-                        } else if(agent.on_a_wrapup === 1) {
-                            agentWrapUp.push(agent);
-                        }
-                    }
-                }
-            })
-        });
-    })
+    
+
     const classes = useStyles(props);
     const pageLayout = useRef(null);
     const [tabValue, setTabValue] = useState(0);
@@ -154,19 +145,31 @@ function DashboardScrumCard(props)
         });
     }
 
+    // function escFunction(event){
+    //         console.log("45454545545454");
+    //         setFullScreen(!isFullscreenEnabled);
+    //       //Do whatever when esc is pressed
+    // }
+    // useEffect(()=> {
+    //     console.log("123123123")
+    //     document.addEventListener("fullscreenchange", escFunction, false);
+    //     return () => {
+    //         document.removeEventListener("fullscreenchange", escFunction, false);
+    //     }
+    // })
     // if ( !widgets || !projects )
     // {
     //     return null;
     // }
 
     return (
-        <div>
+        <div style={{height: "100%"}} className="MyNonDraggableAreaClassName">
             <button onClick={() => setFullScreen(true)}>
                 Go Fullscreen
               </button>
         <Fullscreen
             enabled={isFullscreenEnabled}
-            onChange={isFullscreenEnabled => setFullScreen(true)}
+            onChange={(isFullscreenEnabled) => setFullScreen(isFullscreenEnabled)}
         >
         <FusePageSimple
             
@@ -197,7 +200,7 @@ function DashboardScrumCard(props)
                 </Tabs>
             }
             content={
-                <div className="p-6" style={{width: "100%", height: "100%"}}>
+                <div className="" style={{width: "100%", height: "100%"}}>
                     
                             <FuseAnimateGroup
                                 className="flex flex-wrap"
