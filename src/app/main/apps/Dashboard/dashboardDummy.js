@@ -10,7 +10,7 @@ import withReducer from 'app/store/withReducer';
 import AgentCard from './agentCard';
 import QueueCard from './queueCard';
 import AgentDistribution from './agentDistribution';
-
+import GraphComponent from './graphComponent';
 import { WidthProvider, Responsive } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import DashBoardScrumCard from './dashboardScrumCard';
@@ -36,13 +36,30 @@ function DashboardDummy(props)
     const classes = useStyles(props);
     const pageLayout = useRef(null);
     const [layout, setlayout] = useState(JSON.parse(JSON.stringify(originalLayouts)));
+    const [graphHeight, setGraphHeight] = useState(400);
+    const [graphWidth, setGraphWidth] = useState(900);
     const [tabValue, setTabValue] = useState(0);
     const [selectedProject, setSelectedProject] = useState({
         id    : 1,
         menuEl: null
     });
+    let grapContainer = useRef();
+    useEffect(() => {
+      if(grapContainer) {
+        console.log("grapContainer.clientHeight", grapContainer.clientHeight)
+        // setGraphHeight(grapContainer.clientHeight);
+        // setGraphWidth(grapContainer.clientWidth);
+      }
+    }, [graphHeight, graphWidth])
+    
 
-
+    function onResize () {
+      if(grapContainer) {
+        console.log("grapContainer", grapContainer)
+        // setGraphHeight(grapContainer.clientHeight);
+        // setGraphWidth(grapContainer.clientWidth);
+      }
+    }
 
     function resetLayout() {
         setlayout( {} );
@@ -109,6 +126,7 @@ function DashboardDummy(props)
           onLayoutChange={(layout, layouts) =>
             onLayoutChange(layout, layouts)
           }
+          onResizeStop={onResize}
         >
         <div key="1" data-grid={{key: "1", w: 2, h: 6, x: 0, y: 0, minW: 2, minH: 6, i: "1" }} style={{width: "100%", flexGrow: 1}}>
             {/* <div style={{maxWidth: "99%", maxHeight: "98%"}}>
@@ -121,7 +139,7 @@ function DashboardDummy(props)
                 </IconButton>
               </div>
               <div className="flex flex-col flex-1 w-full" style={{height: "100%", width: "100%", overflow: "auto"}}>
-                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto "
+                <div className="flex flex-col flex-1  w-full mx-auto "
                   style={{height: "100%", width: "100%"}}>
                   <FuseAnimateGroup
 
@@ -145,7 +163,7 @@ function DashboardDummy(props)
                 </IconButton>
               </div>
               <div className="flex flex-col flex-1 w-full" style={{maxHeight: "82%", width: "100%", overflow: "auto"}}>
-                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto "
+                <div className="flex flex-col flex-1  w-full mx-auto "
                   style={{height: "100%", width: "100%"}}>
                   <FuseAnimateGroup
 
@@ -171,7 +189,7 @@ function DashboardDummy(props)
                 </IconButton>
               </div>
               <div className="flex flex-col flex-1 w-full" style={{maxHeight: "82%", width: "100%", overflow: "auto"}}>
-                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto MyNonDraggableAreaClassName"
+                <div className="flex flex-col flex-1  w-full mx-auto MyNonDraggableAreaClassName"
                   style={{height: "100%", width: "100%"}}>
                   <FuseAnimateGroup
 
@@ -197,7 +215,7 @@ function DashboardDummy(props)
                 </IconButton>
               </div>
               <div className="flex flex-col flex-1 w-full" style={{maxHeight: "82%", width: "100%", overflow: "auto"}}>
-                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto MyNonDraggableAreaClassName"
+                <div className="flex flex-col flex-1  w-full mx-auto MyNonDraggableAreaClassName"
                   style={{height: "100%", width: "100%"}}>
                   <FuseAnimateGroup
 
@@ -221,8 +239,9 @@ function DashboardDummy(props)
                 </IconButton>
               </div>
               <div className="flex flex-col flex-1 w-full" style={{maxHeight: "82%", width: "100%", overflow: "auto"}}>
-                <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto MyNonDraggableAreaClassName"
-                  style={{height: "100%", width: "100%"}}>
+                <div className="flex flex-col flex-1  w-full mx-auto MyNonDraggableAreaClassName"
+                  style={{height: "100%", width: "100%"}}
+                  ref={grapContainer}>
                   <FuseAnimateGroup
 
                     enter={{
@@ -231,7 +250,8 @@ function DashboardDummy(props)
                     className="flex flex-wrap px-16"
 
                   >
-                  {/* {queueList.length>0? <GraphComponent queueData={queueList} graphHeight={100} graphWidth={100}/>: null} */}
+                  
+                  {queueList.length>0? <GraphComponent queueData={queueList} graphHeight={graphHeight} graphWidth={graphWidth}/>: null}
                       
                 </FuseAnimateGroup>
               </div>

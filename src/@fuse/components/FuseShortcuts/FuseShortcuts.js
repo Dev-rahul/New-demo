@@ -1,84 +1,121 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Divider, Icon, IconButton, Input, ListItemIcon, ListItemText, Menu, MenuItem, Tooltip, Typography} from '@material-ui/core';
-import {makeStyles} from '@material-ui/styles';
+import React, { useEffect, useRef, useState } from 'react';
+import { Divider, Icon, IconButton, Input, ListItemIcon, ListItemText, Menu, MenuItem, Tooltip, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import * as UserActions from 'app/auth/store/actions';
-import {useDispatch, useSelector} from 'react-redux';
-import {FuseUtils, FuseAnimateGroup} from '@fuse';
-import {Link} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FuseUtils, FuseAnimateGroup } from '@fuse';
+import { Link } from 'react-router-dom';
 import amber from '@material-ui/core/colors/amber';
 import clsx from 'clsx';
 
 const useStyles = makeStyles({
-    root   : {
+    root: {
         '&.horizontal': {},
-        '&.vertical'  : {
+        '&.vertical': {
             flexDirection: 'column'
         }
     },
-    item   : {
+    item: {
         textDecoration: 'none!important',
-        color         : 'inherit'
+        color: 'inherit'
     },
     addIcon: {
         color: amber[600]
     }
 });
 
-function FuseShortcuts(props)
-{
+function FuseShortcuts(props) {
     const dispatch = useDispatch();
-    const shortcuts = useSelector(({auth}) => auth.user.data.shortcuts);
-    const navigationData = useSelector(({fuse}) => fuse.navigation);
+    const shortcuts = getFromLS('shortcuts') || [];
+    const navigationData = useSelector(({ fuse }) => fuse.navigation);
 
     const classes = useStyles(props);
     const searchInputRef = useRef(null);
     const [addMenu, setAddMenu] = useState(null);
+    const [shortCut, setShortCut] = useState(shortcuts);
     const [searchText, setSearchText] = useState('');
     const [searchResults, setSearchResults] = useState(null);
     const [navigation, setNavigation] = useState(null);
-    const shortcutItems = shortcuts ? shortcuts.map(id => FuseUtils.findById(navigationData, id)) : [];
+    const shortcutItems = shortCut ? shortCut.map(id => FuseUtils.findById(navigationData, id)) : [];
 
     useEffect(() => {
-        function flattenNavigation()
-        {
+        function flattenNavigation() {
             setNavigation(FuseUtils.getFlatNavigation(navigationData));
         }
 
         flattenNavigation();
     }, [props.location, navigationData]);
 
-    function addMenuClick(event)
-    {
+    function getFromLS(key) {
+
+        let ls = {}
+
+        if (global.localStorage) {
+
+            try {
+
+                ls = JSON.parse(global.localStorage.getItem('broadview-shorcuts')) || {}
+
+            } catch (e) {
+
+
+            }
+
+        }
+
+        return ls[key]
+
+    }
+
+    function saveToLS(key, value) {
+
+        if (global.localStorage) {
+
+            global.localStorage.setItem(
+
+                'broadview-shorcuts',
+
+                JSON.stringify({
+
+                    [key]: value
+
+                })
+
+            )
+
+        }
+
+    }
+    function addMenuClick(event) {
         setAddMenu(event.currentTarget);
     }
 
-    function addMenuClose()
-    {
+    function addMenuClose() {
         setAddMenu(null);
     }
 
-    function search(ev)
-    {
+    function search(ev) {
         const searchText = ev.target.value;
         setSearchText(searchText);
 
-        if ( searchText.length !== 0 && navigation )
-        {
-            setSearchResults(navigation.filter(item => item.title.toLowerCase().includes(searchText.toLowerCase())));
+        if (searchText.length !== 0 && navigation) {
+            setSearchResults(navigationData[0].children.filter(item => item.title.toLowerCase().includes(searchText.toLowerCase())));
             return;
         }
         setSearchResults(null);
     }
 
-    function toggleInShortcuts(id)
-    {
-        let newShortcuts = [...shortcuts];
+    function toggleInShortcuts(id) {
+        let newShortcuts = [...shortCut];
         newShortcuts = newShortcuts.includes(id) ? newShortcuts.filter(_id => id !== _id) : [...newShortcuts, id];
         dispatch(UserActions.updateUserShortcuts(newShortcuts));
+        console.log(newShortcuts)
+        setShortCut(newShortcuts)
+        saveToLS('shortcuts', newShortcuts);
+
     }
 
-    function ShortcutMenuItem({item, onToggle})
-    {
+    function ShortcutMenuItem({ item, onToggle }) {
         return (
             <Link to={item.url} className={classes.item}>
                 <MenuItem key={item.id}>
@@ -92,7 +129,7 @@ function FuseShortcuts(props)
                             )
                         }
                     </ListItemIcon>
-                    <ListItemText className="pl-0" primary={item.title}/>
+                    <ListItemText className="pl-0" primary={item.title} />
                     <IconButton
                         onClick={(ev) => {
                             ev.preventDefault();
@@ -100,7 +137,7 @@ function FuseShortcuts(props)
                             onToggle(item.id);
                         }}
                     >
-                        <Icon color="action">{shortcuts.includes(item.id) ? 'star' : 'star_border'}</Icon>
+                        <Icon color="action">{shortCut.includes(item.id) ? 'star' : 'star_border'}</Icon>
                     </IconButton>
                 </MenuItem>
             </Link>
@@ -173,7 +210,7 @@ function FuseShortcuts(props)
                     />
                 </div>
 
-                <Divider/>
+                <Divider />
 
                 {searchText.length !== 0 && searchResults && searchResults.map(item => (
                     <ShortcutMenuItem

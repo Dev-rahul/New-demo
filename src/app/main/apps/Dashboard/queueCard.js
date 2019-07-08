@@ -37,6 +37,24 @@ class QueueCard extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+
+    maxLimit = this.props.queueData.fill_alert + (this.props.queueData.fill_warning - (this.props.queueData.fill_alert + 3) % this.props.queueData.fill_warning);
+    orangePercentage = (this.props.queueData.fill_warning / this.maxLimit) * 100;
+    redPercentage = (this.props.queueData.fill_alert / this.maxLimit) * 100;
+    sliderColor = (this.props.queueData.members.length < this.props.queueData.fill_warning) ? '#40FF70' : (this.props.queueData.members.length >= this.props.queueData.fill_alert ? '#ff0000' : '#FF9C2A')
+
+
+    randomNum = Math.floor(Math.random() * (2 + 1));
+    colorArray = ['#40FF70', '#FF9C2A', '#ff0000']
+    SliderStyle = {
+        'background': `linear-gradient(90deg, rgba(0,255,4,1) 0%, rgba(245,255,0,1) ${this.orangePercentage}%, rgba(255,0,0,1) ${this.redPercentage}%)`,
+        "color": `${this.sliderColor}`,
+        "height": "2px",
+        "padding": "7px 0px",
+    }
+
+
+
     autoFlip = (<div className="flex flex-col flex-auto items-center justify-center">
 
 
@@ -78,18 +96,25 @@ class QueueCard extends React.Component {
                             </Typography>
                         </div>
                         <CardContent className="flex flex-col flex-auto justify-center">
-                            <Typography className="font-medium truncate mb-20 pb-24" color="inherit" > 
+                            <Typography className="font-medium truncate mb-20 pb-24" color="inherit" >
                                 Available Agents : {this.props.queueData.members.length}
                             </Typography>
+                            {console.log('Fill Alert::', this.props.queueData.fill_alert)}
+                            {console.log('Fill Warning::', this.props.queueData.fill_warning)}
                             <Slider
-                                    defaultValue={this.props.queueData.fill_alert>= this.props.queueData.fill_warning ? this.props.queueData.fill_alert : this.props.queueData.fill_warning}
-                                    // getAriaValueText={valuetext}
-                                    aria-labelledby="discrete-slider-always"
-                                    step={10}
-                                    // marks={marks}
-                                    valueLabelDisplay="on"
-                                    min={0}
-                                    max={10}
+                                defaultValue={this.props.queueData.members.length}
+                                // getAriaValueText={valuetext}
+                                aria-labelledby="discrete-slider-always"
+                                step={1}
+                                // marks={marks}
+                                valueLabelDisplay="on"
+                                min={0}
+                                max={this.maxLimit}
+                                //valueLabelFormat= {x => this.randomNum}
+                                // className='Slider'
+                                // disabled
+                                style={this.SliderStyle}
+                                disabled
                             />
                         </CardContent>
                         <Divider />
@@ -99,7 +124,7 @@ class QueueCard extends React.Component {
                             />
                             <Typography className="font-medium truncate" color="inherit">
                                 : Calls waiting
-                            </Typography>
+</Typography>
                             <div className="flex items-center justify-center opacity-75">
                                 <Icon className="text-20 mr-8" color="inherit">
                                     access_time
@@ -108,7 +133,7 @@ class QueueCard extends React.Component {
                             </div>
                         </CardActions>
                         {/* <ProgressBar className="w-full" variant="determinate"
-                            completed={30} colors={[30, 70, 95]} /> */}
+completed={30} colors={[30, 70, 95]} /> */}
                     </Card>
                 </div>
 
@@ -123,10 +148,10 @@ class QueueCard extends React.Component {
                             onClick={this.handleClick}
                         >
                             <Typography className=" font-medium truncate " color="inherit">
-                            {this.props.queueData.name}
+                                {this.props.queueData.name}
                             </Typography>
                             <Typography className="font-medium truncate" color="inherit">
-                            {this.props.queueData.extension}
+                                {this.props.queueData.extension}
                             </Typography>
                         </div>
                         <CardContent className="flex flex-col flex-auto w-full p-6">
@@ -137,27 +162,27 @@ class QueueCard extends React.Component {
                                     <Grid container spacing={1}>
                                         <Grid item xs>
                                             <TextField
-                                            style={{marginTop: "5px", marginBottom:"0px"}}
+                                                style={{ marginTop: "5px", marginBottom: "0px" }}
                                                 id="outlined-denseqge"
                                                 label="Fill Warning"
                                                 margin="dense"
                                                 variant="outlined"
-                                                
+
                                                 InputLabelProps={{ style: { fontSize: "12px" } }}
-                                                    InputProps={{ style: { height: "30px" } }}
+                                                InputProps={{ style: { height: "30px" } }}
 
                                             />
                                         </Grid>
                                         <Grid item xs>
                                             <TextField
-                                            style={{marginTop: "5px", marginBottom:"0px"}}
+                                                style={{ marginTop: "5px", marginBottom: "0px" }}
                                                 id="outlined-denefse"
                                                 label="Fill Alert"
                                                 margin="dense"
                                                 variant="outlined"
-                                                
+
                                                 InputLabelProps={{ style: { fontSize: "12px" } }}
-                                                    InputProps={{ style: { height: "30px" } }}
+                                                InputProps={{ style: { height: "30px" } }}
 
                                             />
                                         </Grid>
@@ -167,14 +192,14 @@ class QueueCard extends React.Component {
                                     <Grid container spacing={0}>
                                         <Grid item xs>
                                             <TextField
-                                            style={{marginTop: "5px", marginBottom:"0px"}}
+                                                style={{ marginTop: "5px", marginBottom: "0px" }}
                                                 id="outlined-deewrense"
                                                 label="Answer Time Obj"
                                                 margin="dense"
                                                 variant="outlined"
-                                                
+
                                                 InputLabelProps={{ style: { fontSize: "12px" } }}
-                                                    InputProps={{ style: { height: "30px" } }}
+                                                InputProps={{ style: { height: "30px" } }}
 
                                             />
                                         </Grid>
@@ -185,33 +210,33 @@ class QueueCard extends React.Component {
                                     <Grid container spacing={0}>
                                         <Grid item xs>
                                             <TextField
-                                            style={{marginTop: "5px", marginBottom:"0px"}}
+                                                style={{ marginTop: "5px", marginBottom: "0px" }}
                                                 id="outlined-denswqe"
                                                 label="Waiting Alert (Sec)"
                                                 margin="dense"
                                                 variant="outlined"
                                                 InputLabelProps={{ style: { fontSize: "12px" } }}
-                                                    InputProps={{ style: { height: "30px" } }}
+                                                InputProps={{ style: { height: "30px" } }}
 
                                             />
                                         </Grid>
-                                        </Grid>
-                                        <Grid container spacing={0}>
-                                            <Grid item xs>
-                                                <TextField
-                                                    style={{marginTop: "5px", marginBottom:"0px"}}
-                                                    id="outlined-denswqe"
-                                                    label="Talk time Alert"
-                                                    margin="dense"
-                                                    variant="outlined"
-                                                    InputLabelProps={{ style: { fontSize: "12px" } }}
-                                                    InputProps={{ style: { height: "30px" } }}
+                                    </Grid>
+                                    <Grid container spacing={0}>
+                                        <Grid item xs>
+                                            <TextField
+                                                style={{ marginTop: "5px", marginBottom: "0px" }}
+                                                id="outlined-denswqe"
+                                                label="Talk time Alert"
+                                                margin="dense"
+                                                variant="outlined"
+                                                InputLabelProps={{ style: { fontSize: "12px" } }}
+                                                InputProps={{ style: { height: "30px" } }}
 
-                                                />
-                                            </Grid>
-
+                                            />
                                         </Grid>
-                        
+
+                                    </Grid>
+
                                 </div>
                             </div>
 

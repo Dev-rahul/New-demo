@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import Chip from '@material-ui/core/Chip';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
+import Badge from '@material-ui/core/Badge';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -17,11 +18,18 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { propTypes } from 'formsy-react';
+import { Divider } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
-    minWidth: 150
+    width: 165
+  },
+  title: {
+    fontSize: "1.4rem",
+    display: 'block',
+    paddingBottom: "10px"
   },
   media: {
     height: 0,
@@ -46,6 +54,7 @@ export default function ScrumBoardCard(props) {
     let selectedQueueName = '';
     let agentReady = [], agentBusy =[], agentAway =[], agentWrapUp = [], agentNewLogin =[],agentOnAQueueCall=[], agentCallBack = [];
     console.log("props.selectedQueue",props.selectedQueue)
+    const [badgeCount, setBadgeCount] = React.useState(1);
     if(props.selectedQueue) {
         selectedQueueName =  props.selectedQueue.name;
         props.selectedQueue.members.map(member => {
@@ -95,11 +104,151 @@ export default function ScrumBoardCard(props) {
     } 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleClick(event) {
+  setAnchorEl(event.currentTarget);
+  }
+  
+  function handleClose() {
+  setAnchorEl(null);
+  }
 
   function handleExpandClick() {
     setExpanded(!expanded);
   }
+  // useEffect(() => {
+  //   switch(props.card.id) {
+  //     case 1: 
+         
+  //        setBadgeCount(agentNewLogin.length)
+  //        break;
+         
+  //     case 2: 
+  //       setBadgeCount(agentAway.length);
+  //       break;
+  //     case 3: 
+  //       setBadgeCount(agentReady.length);
+  //       break;
+  //     case 4: 
+  //     setBadgeCount(agentBusy.length);
+  //       break;
+  //     case 5: 
+  //     setBadgeCount(agentCallBack.length);
+  //       break;
+  //     case 6: 
+  //     setBadgeCount(agentOnAQueueCall.length);
+  //       break;
+  //     case 7: 
+  //     setBadgeCount(agentWrapUp.length);
+  //       break;
   
+  //   }
+
+  // }, [])
+  
+  function displayBadgeComponent() {
+    console.log("badgeCount", badgeCount)
+    let badgeComponent = null;
+    switch(props.card.id) {
+      case 1: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentNewLogin.length} color="secondary">
+        
+         <div>
+<IconButton onClick={handleClick} aria-label="Settings">
+<MoreVertIcon /> 
+</IconButton>
+<Menu
+id="simple-menu"
+anchorEl={anchorEl}
+keepMounted
+open={Boolean(anchorEl)}
+onClose={handleClose}
+>
+<MenuItem onClick={handleClose}>Ascending</MenuItem>
+<MenuItem onClick={handleClose}>Descending</MenuItem>
+
+</Menu>
+</div>
+         </Badge>
+      )
+      return badgeComponent;
+         
+      case 2: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentAway.length} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+      return badgeComponent;
+      case 3: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentReady.length} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+      return badgeComponent;
+      case 4: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentBusy.length} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+      return badgeComponent;
+      case 5: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentCallBack.length} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+      return badgeComponent;
+      case 6: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentOnAQueueCall.length} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+      return badgeComponent;
+      case 7: 
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={agentWrapUp.length} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+      return badgeComponent;
+      default:
+      badgeComponent = (
+        <Badge className={classes.margin} badgeContent={99} color="secondary">
+        <IconButton aria-label="Settings">
+         
+             <MoreVertIcon />
+         </IconButton>
+         </Badge>
+      )
+        return badgeComponent;
+    }
+    
+    
+  }
   
   
 function displayagentList(id) {
@@ -108,7 +257,17 @@ function displayagentList(id) {
         let newLoginComponent = [];
         agentNewLogin.map(agent => {
           newLoginComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"new"+agent.firstName} />
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"new"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension}
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>
           )
         })
         return newLoginComponent;
@@ -116,48 +275,108 @@ function displayagentList(id) {
         let agentAwayComponent = [];
         agentAway.map(agent => {
           agentAwayComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"away"+agent.firstName} />
-          )
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"away"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension} 
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>  
+            )
         })
         return agentAwayComponent;
     case 3: 
         let agentReadyComponent = [];
         agentReady.map(agent => {
           agentReadyComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"ready"+agent.firstName} />
-          )
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"ready"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension}
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>
+            )
         })
         return agentReadyComponent;
     case 4: 
         let agentBusyComponent = [];
         agentBusy.map(agent => {
           agentBusyComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"busy"+agent.firstName} />
-          )
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"busy"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension}
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>
+            )
         })
         return agentBusyComponent;
     case 5: 
         let agentCallBackComponent = [];
         agentCallBack.map(agent => {
           agentCallBackComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"callback"+agent.firstName} />
-          )
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"callback"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension}
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>
+            )
         })
         return agentCallBackComponent;
     case 6: 
         let agentOnQueueCallComponent = [];
         agentOnAQueueCall.map(agent => {
           agentOnQueueCallComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"queue"+agent.firstName} />
-          )
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"queueCall"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension}
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>
+            )
         })
         return agentOnQueueCallComponent;
     case 7: 
         let agentWrapUpComponent = [];
         agentWrapUp.map(agent => {
           agentWrapUpComponent.push(
-            <Chip label={agent.firstName} className="m-1" key={agent.extension+"wrapup"+agent.firstName} />
-          )
+            <Card className={classes.subcard} style={{width:"130px", marginBottom:"5px"}} key={agent.extension+"wrapup"+agent.firstName}>
+              <CardContent style={{padding: "2px", width: "100%"}}>
+                <Typography  style={{paddingBottom: "5px", fontSize: "1.1rem"}} color="textSecondary" >
+                    {agent.firstName + " "+ agent.lastName + " x"+ agent.extension}
+                </Typography>
+                <Divider/>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+              </CardContent>
+            </Card>
+            )
         })
         return agentWrapUpComponent;
 
@@ -167,16 +386,17 @@ function displayagentList(id) {
   return (
     <Card className={classes.card} style={{height: "100%"}}>
                                     <CardHeader
-        
+                                        
                                         action={
-                                            <IconButton aria-label="Settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
+                                         displayBadgeComponent()
+                                        
+                                           
                                         }
-                                        title={props.card.title}
+                                        title={<span className={classes.title}>{props.card.title}</span>}
                                     />
       
-                                    <CardContent>
+                                    <CardContent
+                                    style={{paddingTop: "0px", width: "100%"}}>
                                         {/* <Typography variant="body2" color="textSecondary" component="p">
                                         {selectedQueueName}
                                         </Typography> */}
