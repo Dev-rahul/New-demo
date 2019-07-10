@@ -23,7 +23,7 @@ function NavbarFoldedToggleButton(props)
 }
 
 NavbarFoldedToggleButton.defaultProps = {
-    children: <Icon>menu</Icon>
+    children: <Icon style={{color: "black"}}>menu</Icon>
 };
 
 export default NavbarFoldedToggleButton;

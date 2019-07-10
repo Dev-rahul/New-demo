@@ -21,6 +21,7 @@ import { propTypes } from 'formsy-react';
 import { Divider } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Timer from './timer';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -48,6 +49,45 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  Idle: {
+    background: '#F2F2F2'
+    },
+    ready: {
+    background: '#2C7D26'
+    },
+    away: {
+    background: '#EDD6B4'
+    },
+    busy: {
+    background: '#B83900'
+    },
+    callback : {
+    background: "#22B3A8"
+    },
+    onqueuecall: {
+    background: "#034895"
+    },
+    wrapup: {
+    background: "#31C3E9"
+    },
+    readylight: {
+      background: '#F0FAEF'
+      },
+      awaylight: {
+      background: '#fcf8f2'
+      },
+      busylight: {
+      background: '#FFF5F0'
+      },
+      callbacklight : {
+      background: "#F2FCFB"
+      },
+      onqueuecalllight: {
+      background: "#EFF7FF"
+      },
+      wrapuplight: {
+      background: "#F1FBFD"
+      }
 }));
 
 export default function ScrumBoardCard(props) {
@@ -153,96 +193,101 @@ export default function ScrumBoardCard(props) {
     switch(props.card.id) {
       case 1: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentNewLogin.length} color="secondary">
+        
         
          <div>
-<IconButton onClick={handleClick} aria-label="Settings">
-<MoreVertIcon /> 
-</IconButton>
-<Menu
-id="simple-menu"
-anchorEl={anchorEl}
-keepMounted
-open={Boolean(anchorEl)}
-onClose={handleClose}
->
-<MenuItem onClick={handleClose}>Ascending</MenuItem>
-<MenuItem onClick={handleClose}>Descending</MenuItem>
+          <IconButton onClick={handleClick} aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentNewLogin.length} color="secondary">
+            <MoreVertIcon /> 
+            </Badge>
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+          <MenuItem onClick={handleClose}>Ascending</MenuItem>
+          <MenuItem onClick={handleClose}>Descending</MenuItem>
 
-</Menu>
+    </Menu>
 </div>
-         </Badge>
       )
       return badgeComponent;
          
       case 2: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentAway.length} color="secondary">
-        <IconButton aria-label="Settings">
-         
+        
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentAway.length} color="secondary">
              <MoreVertIcon />
+             </Badge>
          </IconButton>
-         </Badge>
       )
       return badgeComponent;
       case 3: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentReady.length} color="secondary">
-        <IconButton aria-label="Settings">
-         
+        
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentReady.length} color="secondary">
              <MoreVertIcon />
+             </Badge>
+
          </IconButton>
-         </Badge>
-      )
+               )
       return badgeComponent;
       case 4: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentBusy.length} color="secondary">
-        <IconButton aria-label="Settings">
-         
+       
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentBusy.length} color="secondary">
              <MoreVertIcon />
+             </Badge>
          </IconButton>
-         </Badge>
+         
       )
       return badgeComponent;
       case 5: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentCallBack.length} color="secondary">
-        <IconButton aria-label="Settings">
-         
+        
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentCallBack.length} color="secondary">
              <MoreVertIcon />
+             </Badge>
          </IconButton>
-         </Badge>
+        
       )
       return badgeComponent;
       case 6: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentOnAQueueCall.length} color="secondary">
-        <IconButton aria-label="Settings">
-         
+        
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentOnAQueueCall.length} color="secondary">
              <MoreVertIcon />
+             </Badge>
          </IconButton>
-         </Badge>
       )
       return badgeComponent;
       case 7: 
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={agentWrapUp.length} color="secondary">
-        <IconButton aria-label="Settings">
-         
+        
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={agentWrapUp.length} color="secondary">
              <MoreVertIcon />
+             </Badge>
          </IconButton>
-         </Badge>
       )
       return badgeComponent;
       default:
       badgeComponent = (
-        <Badge className={classes.margin} badgeContent={99} color="secondary">
-        <IconButton aria-label="Settings">
-         
+        
+        <IconButton aria-label="Settings" style={{padding: "10px"}}>
+          <Badge className={classes.margin} badgeContent={99} color="secondary">
              <MoreVertIcon />
+             </Badge>
          </IconButton>
-         </Badge>
+         
       )
         return badgeComponent;
     }
@@ -264,7 +309,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                  <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>
@@ -282,7 +327,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>  
@@ -300,7 +345,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>
@@ -318,7 +363,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>
@@ -336,7 +381,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>
@@ -354,7 +399,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>
@@ -372,7 +417,7 @@ function displayagentList(id) {
                 </Typography>
                 <Divider/>
                 <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Timer timeInSecond={0}/>
                 </Typography>
               </CardContent>
             </Card>
@@ -384,14 +429,16 @@ function displayagentList(id) {
 }
 
   return (
-    <Card className={classes.card} style={{height: "100%"}}>
+    <Card className={clsx(classes.card, classes[props.card.colorName+'light'])} style={{height: "100%"}}
+    >
                                     <CardHeader
-                                        
+                                        className={classes[props.card.colorName]}
                                         action={
                                          displayBadgeComponent()
                                         
                                            
                                         }
+                                        style={{padding: "6px", marginBottom: "5px"}}
                                         title={<span className={classes.title}>{props.card.title}</span>}
                                     />
       

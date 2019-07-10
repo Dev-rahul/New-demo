@@ -60,37 +60,44 @@ const scrumBoardStates = [
     {
         id: 1,
         agents: [],
-        title: "NEW LOGIN"
+        title: "NEW LOGIN",
+        colorName: 'away'
     },
     {
         id: 2,
         agents: [],
-        title: "AWAY"
+        title: "AWAY",
+        colorName: 'away'
     },
     {
         id: 3,
         agents: [],
-        title: "READY"
+        title: "READY",
+        colorName: 'ready'
     },
     {
         id: 4,
         agents: [],
-        title: "BUSY"
+        title: "BUSY",
+        colorName: 'busy'
     },
     {
         id: 5,
         agents: [],
-        title: "CALL BACK"
+        title: "CALL BACK",
+        colorName: 'callback'
     },
     {
         id: 6,
         agents: [],
-        title: "ON QUEUE CALL"
+        title: "ON QUEUE CALL",
+        colorName: 'onqueuecall'
     },
     {
         id: 7,
         agents: [],
-        title: "WRAP UP"
+        title: "WRAP UP",
+        colorName: 'wrapup'
     }
 
 ]
@@ -164,12 +171,10 @@ function DashboardScrumCard(props)
 
     return (
         <div style={{height: "100%"}} className="MyNonDraggableAreaClassName">
-            <button onClick={() => setFullScreen(true)}>
-                Go Fullscreen
-              </button>
+            
         <Fullscreen
-            enabled={isFullscreenEnabled}
-            onChange={(isFullscreenEnabled) => setFullScreen(isFullscreenEnabled)}
+            enabled={props.isFullscreenEnabled}
+            onChange={(isFullscreenEnabled) => props.handleFullScreenChange(isFullscreenEnabled)}
         >
         <FusePageSimple
             
@@ -178,6 +183,7 @@ function DashboardScrumCard(props)
                 content     : classes.content,
                 
             }}
+            style={{height: "100%"}}
             
             contentToolbar={
              
@@ -190,6 +196,7 @@ function DashboardScrumCard(props)
                     variant="scrollable"
                     scrollButtons="off"
                     className="w-full border-b-1 px-24"
+                    style={{height: "100%"}}
                     
                 >
                 {props.queueList.map(queue => {
@@ -213,7 +220,7 @@ function DashboardScrumCard(props)
                             {
                                 scrumBoardStates.map(card=> {
                                     return (
-                                        <div className="p-6" key={card.id}>
+                                        <div className="p-6" key={card.id} style={{height: "100%"}}>
                                             <ScrumBoardCard selectedQueue={props.queueList[tabValue]} 
                                             card={card}
                                             agentList={props.agentList}/>
