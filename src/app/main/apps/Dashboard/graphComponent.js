@@ -32,6 +32,7 @@ export default class ClusteredBarChart extends React.Component {
     lastDrawLocation: null,
     series : []
   };
+  
   // graphResize = () => {
   //   const divHeight = document.getElementsByClassName('graphDiv')[0].clientHeight;
   //   const divWidth = document.getElementsByClassName('graphDiv')[0].clientWidth;
@@ -41,6 +42,7 @@ export default class ClusteredBarChart extends React.Component {
   // }
 
   componentDidMount() {
+
     // let callwaiting = [], callsConnected =[], agentsReady =[], agentsInWrapUp =[],
     // agentsInQueueCall =[], agentsBusy =[], agentsAway =[];
     // this.props.queueData.map((queue, index) => {
@@ -237,13 +239,13 @@ export default class ClusteredBarChart extends React.Component {
               ]
             }
             
-            width={this.props.graphWidth -50}
-            height={this.props.graphHeight -150}
+            width={this.props.graphWidth -20}
+            height={this.props.graphHeight -75}
             stackBy="y"
           >
             
             <DiscreteColorLegend
-              style={{  width: this.props.graphWidth-100}}
+              style={{  width: this.props.graphWidth-20}}
               orientation="horizontal"
               items={[
                 {

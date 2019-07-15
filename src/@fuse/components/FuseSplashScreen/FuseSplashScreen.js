@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../../../assets/icon.png'
 
 function FuseSplashScreen()
 {
@@ -8,7 +9,7 @@ function FuseSplashScreen()
             <div className="center">
 
                 <div className="logo">
-                    <img width="128" src="assets/images/logos/fuse.svg" alt="logo"/>
+                    <img width="128" src={Logo} alt="logo"/>
                 </div>
                 <div className="spinner-wrapper">
                     <div className="spinner">

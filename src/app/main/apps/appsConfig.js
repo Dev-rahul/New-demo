@@ -5,6 +5,7 @@ import {ContactsAppConfig} from './contacts/ContactsAppConfig';
 import {CalendarAppConfig} from './calendar/CalendarAppConfig';
 import {ChatAppConfig} from "./chat/ChatAppConfig";
 import {NotesAppConfig} from './notes/NotesAppConfig';
+import {AgentChatConfig} from './AgnetChat/agentChat.config';
 
 export const appsConfigs = [
     DashboardConfig,
@@ -13,5 +14,6 @@ export const appsConfigs = [
     ContactsAppConfig,
     CalendarAppConfig,
     ChatAppConfig,
-    NotesAppConfig
+    NotesAppConfig,
+    AgentChatConfig
 ];

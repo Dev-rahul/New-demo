@@ -7,7 +7,7 @@ const navigationConfig = [
         'children': [
             {
                 'id'      : 'dashboards',
-                'title'   : 'Dashboards',
+                'title'   : 'DASHBOARD',
                 'type'    : 'collapse',
                 'icon'    : 'dashboard',
                 'url'  : '/apps/dashboard',
@@ -30,7 +30,7 @@ const navigationConfig = [
             },
             {
                 'id'   : 'chat',
-                'title': 'Chat',
+                'title': 'CHAT',
                 'type' : 'item',
                 'icon' : 'chat',
                 'url'  : '/apps/chat',
@@ -39,6 +39,35 @@ const navigationConfig = [
                     'bg'   : 'rgb(9, 210, 97)',
                     'fg'   : '#FFFFFF'
                 }
+            },
+            {
+                'id'   : 'agentchat',
+                'title': 'AGENT CHAT',
+                'type' : 'collapse',
+                'icon' : 'chat',
+                'children': [
+                    {
+                    'id'   : 'Ongoing-chats',
+                    'title': 'Ongoing chat',
+                    'type' : 'item',
+                    'icon' : 'chat',
+                    'url'   : '/apps/agentChat'
+                    },
+                    {
+                        'id'   : 'missed-chats',
+                        'title': 'Missed chat',
+                        'type' : 'item',
+                        'icon' : 'chat',
+                        'url'   : '/apps/agentMissedChat'
+                    },
+                    {
+                            'id'   : 'History-chats',
+                            'title': 'History',
+                            'type' : 'item',
+                            'icon' : 'chat',
+                            'url'   : '/apps/chatHistory'
+                    }
+            ]
             },{
                 'id'   : 'Completed Events',
                 'title': 'COMPLETED EVENTS',

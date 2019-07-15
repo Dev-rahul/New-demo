@@ -3,7 +3,9 @@ import React from 'react';
 export const ChatAppConfig = {
     settings: {
         layout: {
-            config: {}
+            config: {
+                chatpanel: false
+            }
         }
     },
     routes  : [

@@ -20,6 +20,7 @@ import {
     LinearProgressƒ
 } from "@material-ui/core";
 import Slider from '@material-ui/lab/Slider';
+import ReactSpeedometer from "react-d3-speedometer"
 import ReactCardFlip from "react-card-flip";
 import Widget3 from './agentPerformance';
 import ProgressBar from 'react-progress-bar-battlenet-style';
@@ -27,7 +28,7 @@ import ProgressBar from 'react-progress-bar-battlenet-style';
 const colorCode = {
     Idle: '#F2F2F2',
     in_queue: '#31C3E9',
-    available: '#31C3E9',
+    available: '#2C7D26',
     out_queue: "#2C7D26",
     callback: '#EDD6B4'
 }
@@ -124,7 +125,7 @@ class QueueCard extends React.Component {
                 <div className="p-12" key="front" style={{ width: "225px" }}>
                     <Card elevation={1} className="flex flex-col h-256">
                         <div
-                            className="flex flex-shrink-0 items-center justify-between px-24 h-32"
+                            className="flex flex-shrink-0 items-center justify-between px-6 h-32"
                             style={{
                                 background: colorCode[queueStatus],
                                 color: "secondary"
@@ -134,12 +135,15 @@ class QueueCard extends React.Component {
                             <Typography className="font-medium truncate" color="inherit">
                                 {this.props.queueData.name}
                             </Typography>
-                            <Typography className="font-medium truncate" color="inherit">
-                                {this.props.queueData.extension}
+                            <div style={{marginTop: "5px"}}>
+                            <Typography className="font-medium truncate" color="inherit" style={{float: "left"}}>
+                                {"q"+this.props.queueData.extension}
                             </Typography>
+                            <Icon fontSize="small">close</Icon>
+                            </div>
                         </div>
                         <CardContent className="flex flex-col flex-auto justify-center">
-                            <Typography className="font-medium truncate mb-20 pb-24" color="inherit" >
+                            <Typography className="font-medium truncate pb-12" color="inherit" >
                                 Available Agents : {this.props.queueData.members.length}
                             </Typography>
                             {console.log('Fill Alert::', this.props.queueData.fill_alert)}
@@ -162,20 +166,27 @@ class QueueCard extends React.Component {
                                 valueLabelDisplay="auto"
                                 
                             /> */}
-                            <Slider
-        defaultValue={20}
-        getAriaValueText={this.valuetext}
-        aria-labelledby="discrete-slider-custom"
-        step={1}
-        valueLabelDisplay="auto"
-        marks={marks}
-        rail= {colorCode.callback}
-      />
+   
+                            <ReactSpeedometer
+                                value={this.props.queueData.calls_waiting}
+                                segments={20}
+                                width={180}
+                                height={100}
+                                minValue={0}
+                                maxValue={20}
+                                startColor="green"
+                                endColor="red"
+                                maxSegmentLabels={3}
+                                
+                                // startColor will be ignored
+                                // endColor will be ignored
+                            />
+                            
                         </CardContent>
                         <Divider />
                         <CardActions style={{ "justifyContent": "space-between",padding: "3px", width: "100%", display: "flex" }} className="justify-center">
                             <Chip 
-                                label="2"
+                                label={this.props.queueData.calls_waiting}
                             />
                             <Typography className="font-medium truncate" color="inherit" style={{fontSize: "1.2rem"}}>
                                 : Calls waiting
@@ -184,6 +195,9 @@ class QueueCard extends React.Component {
                                 <Timer timeInSecond={0}/>
                             </div>
                         </CardActions>
+                        <div className="w-full" style={{height: "3px", backgroundColor:colorCode[queueStatus]}}>
+
+                        </div>
                         {/* <ProgressBar className="w-full" variant="determinate"
 completed={30} colors={[30, 70, 95]} /> */}
                     </Card>
@@ -203,7 +217,7 @@ completed={30} colors={[30, 70, 95]} /> */}
                                 {this.props.queueData.name}
                             </Typography>
                             <Typography className="font-medium truncate" color="inherit">
-                                {this.props.queueData.extension}
+                                {"q" +this.props.queueData.extension}
                             </Typography>
                         </div>
                         <CardContent className="flex flex-col flex-auto w-full p-6">
@@ -302,6 +316,9 @@ completed={30} colors={[30, 70, 95]} /> */}
                             <Timer timeInSecond={0}/>
                             </div>
                         </CardActions>
+                        <div className="w-full" style={{height: "3px", backgroundColor:colorCode[queueStatus]}}>
+
+                        </div>
 
                     </Card>
                 </div>

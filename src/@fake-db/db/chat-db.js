@@ -6,48 +6,48 @@ const chatDb = {
     contacts: [
         {
             'id': '5725a680b3249760ea21de52',
-            'name': 'Alice Freeman',
-            'avatar': 'https://api.adorable.io/avatars/114/abott@adorable.pngjpg',
+            'name': 'Amarnath',
+            'avatar': 'https://ui-avatars.com/api/?name=Amarnath' ,
             'status': 'online',
-            'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+            'mood': 'Working on a new Project',
             'unread': '2'
         },
         {
             'id': '5725a680606588342058356d',
-            'name': 'Arnold',
-            'avatar': 'https://api.adorable.io/avatars/114/abott@adorable.png',
+            'name': 'Jerin Devasia',
+            'avatar': 'https://ui-avatars.com/api/?name=Jerin+D',
             'status': 'do-not-disturb',
             'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
             'unread': '3'
         },
         {
             'id': '5725a68009e20d0a9e9acf2a',
-            'name': 'Barrera',
-            'avatar': 'assets/images/avatars/Barrera.jpg',
+            'name': 'Rahul',
+            'avatar': 'https://ui-avatars.com/api/?name=Rahul',
             'status': 'do-not-disturb',
-            'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+            'mood': 'JavaScripting',
             'unread': '1'
         },
         {
             'id': '5725a6809fdd915739187ed5',
-            'name': 'Blair',
-            'avatar': 'assets/images/avatars/Blair.jpg',
+            'name': 'Zabi',
+            'avatar': 'https://ui-avatars.com/api/?name=Zabi',
             'status': 'offline',
-            'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...'
+            'mood': 'Lorem ipsum'
         },
         {
             'id': '5725a68007920cf75051da64',
-            'name': 'Boyle',
-            'avatar': 'assets/images/avatars/Boyle.jpg',
+            'name': 'Kayes',
+            'avatar': 'https://ui-avatars.com/api/?name=Kayes',
             'status': 'offline',
-            'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...'
+            'mood': ''
         },
         {
             'id': '5725a68031fdbb1db2c1af47',
-            'name': 'Christy',
-            'avatar': 'assets/images/avatars/Christy.jpg',
+            'name': 'Shiva',
+            'avatar': 'https://ui-avatars.com/api/?name=Shiva',
             'status': 'offline',
-            'mood': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...'
+            'mood': 'Lorem ipsum'
         },
         {
             'id': '5725a680bc670af746c435e2',
@@ -189,94 +189,35 @@ const chatDb = {
             'dialog': [
                 {
                     'who': '5725a680b3249760ea21de52',
-                    'message': 'Aenean et justo pulvinar, semper lorem ac, laoreet lacus.',
-                    'time': '2017-03-22T08:54:28.299Z'
+                    'message': 'Hello',
+                    'time': '2019-02-22T08:54:28.299Z'
                 },
                 {
                     'who': '5725a6802d10e277a0f35724',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T08:55:28.299Z'
+                    'message': 'Hey, Amarnath',
+                    'time': '2019-06-22T08:55:28.299Z'
                 },
                 {
                     'who': '5725a6802d10e277a0f35724',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T08:56:28.299Z'
+                    'message': 'Could you help me with this defect',
+                    'time': '2019-06-22T08:56:28.299Z'
                 },
                 {
                     'who': '5725a680b3249760ea21de52',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T09:00:28.299Z'
+                    'message': 'Sure, will be there in 5 mins',
+                    'time': '2019-06-22T09:00:28.299Z'
                 },
                 {
                     'who': '5725a6802d10e277a0f35724',
-                    'message': 'Sed at ex sit amet odio tincidunt accumsan',
-                    'time': '2017-03-22T09:02:28.299Z'
+                    'message': 'Thanks',
+                    'time': '2019-06-22T09:02:28.299Z'
                 },
                 {
                     'who': '5725a680b3249760ea21de52',
-                    'message': 'Proin sit amet mi eu nisl interdum vestibulum ac vel sem',
-                    'time': '2017-03-22T09:05:28.299Z'
+                    'message': 'Bye',
+                    'time': '2019-06-22T09:05:28.299Z'
                 },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T09:14:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Proin sit amet mi eu nisl interdum vestibulum ac vel sem',
-                    'time': '2017-03-22T09:16:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T09:17:28.299Z'
-                },
-                {
-                    'who': '5725a6802d10e277a0f35724',
-                    'message': 'Sed at ex sit amet odio tincidunt accumsan',
-                    'time': '2017-03-22T09:20:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Proin sit amet mi eu nisl interdum vestibulum ac vel sem',
-                    'time': '2017-03-22T09:22:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T09:25:28.299Z'
-                },
-                {
-                    'who': '5725a6802d10e277a0f35724',
-                    'message': 'Sed at ex sit amet odio tincidunt accumsan',
-                    'time': '2017-03-22T09:27:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Proin sit amet mi eu nisl interdum vestibulum ac vel sem',
-                    'time': '2017-03-22T09:33:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Proin sit amet mi eu nisl interdum vestibulum ac vel sem',
-                    'time': '2017-03-22T09:34:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-03-22T09:35:28.299Z'
-                },
-                {
-                    'who': '5725a6802d10e277a0f35724',
-                    'message': 'Sed at ex sit amet odio tincidunt accumsan',
-                    'time': '2017-03-22T09:45:28.299Z'
-                },
-                {
-                    'who': '5725a680b3249760ea21de52',
-                    'message': 'Proin sit amet mi eu nisl interdum vestibulum ac vel sem',
-                    'time': '2017-03-22T10:00:28.299Z'
-                }
+              
             ]
         },
         {
@@ -284,18 +225,18 @@ const chatDb = {
             'dialog': [
                 {
                     'who': '5725a680606588342058356d',
-                    'message': 'Aenean et justo pulvinar, semper lorem ac, laoreet lacus.',
-                    'time': '2017-04-22T01:00:00.299Z'
+                    'message': 'Hey, How are you?',
+                    'time': '2019-06-22T01:00:00.299Z'
                 },
                 {
                     'who': '5725a6802d10e277a0f35724',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-04-22T01:05:00.299Z'
+                    'message': 'I am good Jerin, could we meet up for lunch',
+                    'time': '2019-06-22T01:05:00.299Z'
                 },
                 {
                     'who': '5725a680606588342058356d',
-                    'message': 'Mauris lacinia purus id felis accumsan, a finibus libero cursus',
-                    'time': '2017-04-22T01:10:00.299Z'
+                    'message': 'Yes, we can.',
+                    'time': '2019-06-22T01:10:00.299Z'
                 }
             ]
         },
@@ -304,8 +245,8 @@ const chatDb = {
             'dialog': [
                 {
                     'who': '5725a68009e20d0a9e9acf2a',
-                    'message': 'Aenean et justo pulvinar, semper lorem ac, laoreet lacus.',
-                    'time': '2017-04-22T02:10:00.299Z'
+                    'message': 'Meeting is cancelled for today',
+                    'time': '2019-06-22T02:10:00.299Z'
                 }
             ]
         }

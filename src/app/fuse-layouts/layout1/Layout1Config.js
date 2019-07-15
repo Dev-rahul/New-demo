@@ -3,6 +3,7 @@ const config = {
     defaults: {
         mode          : 'fullwidth',
         scroll        : 'content',
+        chatpanel : true,
         navbar        : {
             display : true,
             folded  : false,

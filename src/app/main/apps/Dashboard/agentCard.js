@@ -153,7 +153,7 @@ class AgentCard extends React.Component {
                                 {this.props.agentData.firstName + " " + this.props.agentData.lastName}
                             </Typography>
                             <Typography className="font-medium truncate" color="inherit">
-                            {this.props.agentData.extension}
+                            {"x" +this.props.agentData.extension}
                             </Typography>
                         </div>
                         <CardContent className="flex flex-col flex-auto  justify-center">
@@ -179,7 +179,7 @@ class AgentCard extends React.Component {
                             <div className="flex  flex-row flex-wrap items-left justify-center " style={{height: "100%",overflowY: "auto"}}>
                                 {this.props.agentData.queues.map(queue => {
                                     return (
-                                        <Chip label={queue.name} className="m-1" key={queue.extension+""+queue.name}
+                                        <Chip label={queue.name} className="m-1" key={queue.extension+""+queue.name+""+this.props.agentData.firstName}
                                         style={{height: "25px"}} />
                                     )
                                 })}
@@ -229,7 +229,7 @@ class AgentCard extends React.Component {
                             {this.props.agentData.firstName + " " + this.props.agentData.lastName}
                             </Typography>
                             <Typography className="font-medium truncate" color="inherit">
-                                {this.props.agentData.extension}
+                                {"x" +this.props.agentData.extension}
                             </Typography>
                         </div>
                         <CardContent

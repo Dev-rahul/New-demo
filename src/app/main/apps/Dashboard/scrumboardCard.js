@@ -197,7 +197,7 @@ export default function ScrumBoardCard(props) {
         
          <div>
           <IconButton onClick={handleClick} aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentNewLogin.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentNewLogin.length} color="primary">
             <MoreVertIcon /> 
             </Badge>
           </IconButton>
@@ -220,7 +220,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
         
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentAway.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentAway.length} color="primary">
              <MoreVertIcon />
              </Badge>
          </IconButton>
@@ -230,7 +230,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
         
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentReady.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentReady.length} color="primary" >
              <MoreVertIcon />
              </Badge>
 
@@ -241,7 +241,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
        
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentBusy.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentBusy.length} color="primary">
              <MoreVertIcon />
              </Badge>
          </IconButton>
@@ -252,7 +252,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
         
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentCallBack.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentCallBack.length} color="primary">
              <MoreVertIcon />
              </Badge>
          </IconButton>
@@ -263,7 +263,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
         
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentOnAQueueCall.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentOnAQueueCall.length} color="primary">
              <MoreVertIcon />
              </Badge>
          </IconButton>
@@ -273,7 +273,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
         
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={agentWrapUp.length} color="secondary">
+          <Badge className={classes.margin} badgeContent={agentWrapUp.length} color="primary">
              <MoreVertIcon />
              </Badge>
          </IconButton>
@@ -283,7 +283,7 @@ export default function ScrumBoardCard(props) {
       badgeComponent = (
         
         <IconButton aria-label="Settings" style={{padding: "10px"}}>
-          <Badge className={classes.margin} badgeContent={99} color="secondary">
+          <Badge className={classes.margin} badgeContent={99} color="primary">
              <MoreVertIcon />
              </Badge>
          </IconButton>
@@ -443,7 +443,7 @@ function displayagentList(id) {
                                     />
       
                                     <CardContent
-                                    style={{paddingTop: "0px", width: "100%"}}>
+                                    style={{paddingTop: "0px", width: "100%", minHeight: "135px"}}>
                                         {/* <Typography variant="body2" color="textSecondary" component="p">
                                         {selectedQueueName}
                                         </Typography> */}

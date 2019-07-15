@@ -85,7 +85,7 @@ this.cols.splice(o.a, 0, this.cols.splice(o.b, 1)[0])
 
 // render
 return (
-<div className='esr-table'>
+<div className='esr-table' style={{height: "100%"}}>
 <ReactTable {...this.props} data={rows} columns={this.cols} />
 </div>
 )
