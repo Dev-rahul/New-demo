@@ -1,6 +1,9 @@
 import React, { useEffect,useState, useRef } from 'react';
 import withReducer from 'app/store/withReducer';
 import reducer from '../../../store/reducers';
+
+const defaultStyle = "#000";
+const orgStyle = "#fff"
 function Timer (props) {
 let timeInseconds = props.timeInSecond;
 console.log("timeInseconds", timeInseconds)
@@ -25,11 +28,14 @@ clearInterval(interval);
 }
 }
 },[props.timeInSecond]);
-
+let elemStyle = "#000";
+if(props.styleTag ==='chat') {
+    elemStyle = "#fff"
+}
 
 
 return (
-<span style={{color: "#000"}}>{timeToShow}</span>
+<span style={{color: elemStyle}}>{timeToShow}</span>
 )
 }
 export default withReducer('Timer', reducer)(Timer);

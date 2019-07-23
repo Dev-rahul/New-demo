@@ -195,12 +195,9 @@ Last Sale On : {Date.now()}
 </CardContent>
 </Card>
     <Card elevation={3} className="flex flex-col h-256 ">
-<Typography className="font-medium truncate" color="inherit">
-Do you want to see the chat?
-</Typography>
 <CardContent className="flex flex-row justify-between">
 
-<Button onClick={toggleDrawer} component={NavLinkAdapter} exact="true" to={'/apps/agentChat'}
+<Button onClick={toggleDrawer} component={NavLinkAdapter}  to={'/apps/agentChat'}
 
 variant="contained" color="primary" style={{backgroundColor: "green"}}>
 Accept

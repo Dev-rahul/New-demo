@@ -29,22 +29,11 @@ const navigationConfig = [
                 ]
             },
             {
-                'id'   : 'chat',
-                'title': 'CHAT',
-                'type' : 'item',
-                'icon' : 'chat',
-                'url'  : '/apps/chat',
-                'badge': {
-                    'title': 13,
-                    'bg'   : 'rgb(9, 210, 97)',
-                    'fg'   : '#FFFFFF'
-                }
-            },
-            {
                 'id'   : 'agentchat',
                 'title': 'AGENT CHAT',
                 'type' : 'collapse',
                 'icon' : 'chat',
+                'url'   : '/apps/agentMainchat',
                 'children': [
                     {
                     'id'   : 'Ongoing-chats',
